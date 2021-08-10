@@ -1,12 +1,12 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <!-- saved from url=(0027)http://itzoo.info/love.html -->
-<html xml:lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<html xml:lang="zh-CN" xmlns="http://www.w3.org/1999/xhtml">
 
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <!-- <title>demo</title> -->
-    <title>羊羊&缪崽</title>
-    <link rel="icon" href="favicon.ico">
+    <title>demo</title>
+    <!-- <title>羊羊&缪崽</title> -->
+    <!-- <link rel="icon" href="favicon.ico"> -->
     <link type="text/css" rel="stylesheet" href="./Love_files/default.css">
     <script type="text/javascript" src="./Love_files/jquery.min.js"></script>
     <script type="text/javascript" src="./Love_files/jscex.min.js"></script>
@@ -17,7 +17,39 @@
     <script type="text/javascript" src="./Love_files/jscex-async-powerpack.min.js"></script>
     <script type="text/javascript" src="./Love_files/functions.js" charset="utf-8"></script>
     <script type="text/javascript" src="./Love_files/love.js" charset="utf-8"></script>
-
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, viewport-fit=cover">
+    <script>
+        // 解决移动端 1px 细线的问题
+        (function() {
+            let scale = 1 / devicePixelRatio; //DPR 比值
+            document.querySelector("meta[name='viewport']").setAttribute("content", 'initial-scale=' + scale + ', maximum-scale=' + scale + ', minimum-scale=' + scale + ', user-scalable=no')
+        })()
+        var os = function() {
+            var ua = navigator.userAgent,
+                isWindowsPhone = /(?:Windows Phone)/.test(ua),
+                isSymbian = /(?:SymbianOS)/.test(ua) || isWindowsPhone,
+                isAndroid = /(?:Android)/.test(ua),
+                isFireFox = /(?:Firefox)/.test(ua),
+                isChrome = /(?:Chrome|CriOS)/.test(ua),
+                isTablet = /(?:iPad|PlayBook)/.test(ua) || (isAndroid && !/(?:Mobile)/.test(ua)) || (isFireFox && /(?:Tablet)/.test(ua)),
+                isPhone = /(?:iPhone)/.test(ua) && !isTablet,
+                isPc = !isPhone && !isAndroid && !isSymbian;
+            return {
+                isTablet: isTablet,
+                isPhone: isPhone,
+                isAndroid: isAndroid,
+                isPc: isPc
+            };
+        }();
+        $(document).ready(function() {
+            if (os.isAndroid || os.isPhone) {
+                $("#main").css({
+                    // "margin-top": "16%"
+                    "margin-top": "40%"
+                })
+            }
+        });
+    </script>
 </head>
 
 <body>
@@ -25,7 +57,7 @@
         <div id="error">羊老师，您使用的浏览器无法支持即将显示的内容，请换成谷歌(<a href="http://www.google.cn/chrome/intl/zh-CN/landing_chrome.html?hl=zh-CN&brand=CHMI">Chrome</a>)或者火狐(<a href="http://firefox.com.cn/download/">Firefox</a>)浏览器哟~</div>
         <div id="wrap">
             <div id="text">
-                <div id="code">
+                <!-- <div id="code">
                     <span class="say">我的羊羊，我会牵着你的手，走到满头白发的那一天，</span><br>
                     <span class="say">我会守护你生命里的精彩，并陪伴你一路精彩下去。</span><br>
                     <span class="say">你的幸福快乐，是我一生的追求。</span><br>
@@ -47,10 +79,29 @@
                     <span class="say">我愿意爱你直到老去！</span><br>
                     <br>
                     <span class="say"><span class="space"></span> -- 缪崽.</span>
+                </div> -->
+                <div id="code">
+                    <span class="say">8月9日消息，近日，阿里女员工疑遭侵害一事引发舆</span><br>
+                    <span class="say">对此，人民日报评论称，越是扩张发展，企业文</span><br>
+                    <span class="say">近日，“某企业女员工被侵害”一事持续引发关注。</span><br>
+                    <span class="say">取证；根据相关企业公布的“阶段性调查和处理</span><br>
+                    <span class="say">截至目前，事实暂未清晰，有待警</span><br>
+                    <span class="say">方权威调查后及时通报；如有人员违法犯罪，</span><br>
+                    <span class="say">受到法律制裁。</span><br>
+                    <span class="say">我们相信，真相与正义不会缺席！</span><br>
+                    <span class="say">舆情焦点往往是关切重点。</span><br>
+                    <span class="say">此事在网络平台曝光后，引致人们</span><br>
+                    <br>
+                    <span class="say">权益，有的呼吁维权渠道，有</span><br>
+                    <span class="say">的反思“酒桌文化”……这些探讨</span><br>
+                    <span class="say">始于但不限于这一件事，为人们</span><br>
+                    <br>
+                    <span class="say"><span class="space"></span> -- 人民日报</span>
                 </div>
             </div>
             <div id="clock-box">
-                <a href="javascript:;" target="_blank">缪老师</a> 与 <a href="javascript:;" target="_blank">羊老师</a> 在一起的
+                <a href="javascript:;" target="_blank">人民日报评“阿里女员工疑被侵害”</a>
+                <!-- <a href="javascript:;" target="_blank">缪老师</a> 与 <a href="javascript:;" target="_blank">羊老师</a> 在一起的 -->
                 <div id="clock"></div>
             </div>
             <canvas id="canvas" width="1100" height="680"></canvas>

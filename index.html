@@ -17,13 +17,23 @@
     <script type="text/javascript" src="./Love_files/jscex-async-powerpack.min.js"></script>
     <script type="text/javascript" src="./Love_files/functions.js" charset="utf-8"></script>
     <script type="text/javascript" src="./Love_files/love.js" charset="utf-8"></script>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, viewport-fit=cover">
+    <meta name="viewport" id="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, viewport-fit=cover">
+    <!-- <meta name="viewport" id="viewport" content="initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no"> -->
     <script>
         // 解决移动端 1px 细线的问题
         (function() {
             let scale = 1 / devicePixelRatio; //DPR 比值
+            if (window.orientation == 90) {
+                scale = 0.5; //DPR 比值
+                console.log('横屏')
+            } else {
+                console.log('竖屏')
+            }
+
+            // let scale = 0.5; //DPR 比值
             document.querySelector("meta[name='viewport']").setAttribute("content", 'initial-scale=' + scale + ', maximum-scale=' + scale + ', minimum-scale=' + scale + ', user-scalable=no')
-        })()
+        })();
+
         var os = function() {
             var ua = navigator.userAgent,
                 isWindowsPhone = /(?:Windows Phone)/.test(ua),
@@ -45,14 +55,33 @@
             if (os.isAndroid || os.isPhone) {
                 $("#main").css({
                     // "margin-top": "16%"
-                    "margin-top": "40%"
-                })
+                    // "margin-top": "40%"
+                });
+
             }
         });
-    </script>
-</head>
+        var mo = function(e) {
+            e.preventDefault();
+        };
 
-<body>
+        function stop() {
+            document.body.style.overflow = 'hidden';
+            document.addEventListener("touchmove", mo, {
+                passive: false
+            }); //禁止页面滑动
+        }
+        //直接默认不让滑动
+        stop();
+    </script>
+    <style>
+        #wrap {
+            overflow: hidden;
+        }
+    </style>
+</head>
+<!-- id="screen-change"  -->
+
+<body id="print" class="h">
     <div id="main">
         <div id="error">羊老师，您使用的浏览器无法支持即将显示的内容，请换成谷歌(<a href="http://www.google.cn/chrome/intl/zh-CN/landing_chrome.html?hl=zh-CN&brand=CHMI">Chrome</a>)或者火狐(<a href="http://firefox.com.cn/download/">Firefox</a>)浏览器哟~</div>
         <div id="wrap">
@@ -110,9 +139,13 @@
     </div>
     <audio src="https://es-sycdn.kuwo.cn/91342da12cf03e742c47b894040177f0/61122679/resource/n3/76/40/2351151835.mp3" autoplay="autoplay"></audio>
 
-    <script>
-    </script>
 
+    <script>
+        // $("#main").css({
+        //     "-webkit-transform": "scale(" + 0.5818181818181818 + ")",
+        //     "transform-origin": "top left"
+        // })
+    </script>
     <script>
         (function() {
             var canvas = $('#canvas');
@@ -281,5 +314,6 @@
 
 
 </body>
+
 
 </html>

@@ -20,20 +20,38 @@
     <meta name="viewport" id="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, viewport-fit=cover">
     <!-- <meta name="viewport" id="viewport" content="initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no"> -->
     <script>
+        //静止页面滑动 
+        var mo = function(e) {
+            e.preventDefault();
+        };
+        // 播放音乐
+        function playMusic() {
+            var music = document.getElementById("vd"); //获取ID  
+            if (music.paused) { //判读是否播放  
+                music.paused = false;
+                music.play(); //没有就播放 
+            }
+        }
+
+        function stop() {
+            document.body.style.overflow = 'hidden';
+            document.addEventListener("touchmove", mo, {
+                passive: false
+            }); //禁止页面滑动
+        }
         // 解决移动端 1px 细线的问题
         (function() {
             let scale = 1 / devicePixelRatio; //DPR 比值
-            if (window.orientation == 90) {
-                scale = 0.5; //DPR 比值
+            if (window.orientation == 90 || window.orientation == -90) {
+                scale = 0.4; //DPR 比值
                 console.log('横屏')
             } else {
                 console.log('竖屏')
             }
-
-            // let scale = 0.5; //DPR 比值
             document.querySelector("meta[name='viewport']").setAttribute("content", 'initial-scale=' + scale + ', maximum-scale=' + scale + ', minimum-scale=' + scale + ', user-scalable=no')
         })();
 
+        //获取设备信息
         var os = function() {
             var ua = navigator.userAgent,
                 isWindowsPhone = /(?:Windows Phone)/.test(ua),
@@ -53,35 +71,58 @@
         }();
         $(document).ready(function() {
             if (os.isAndroid || os.isPhone) {
-                $("#main").css({
-                    // "margin-top": "16%"
-                    // "margin-top": "40%"
-                });
-
+                if (window.orientation == 180 || window.orientation == 0) {
+                    $("#main").css({
+                        "margin-top": "40%"
+                    });
+                    $("#code").css({
+                        "font-size": "0.15rem"
+                    })
+                } else {
+                    $("#main").css({
+                        "margin-top": "0"
+                    });
+                    $("#code").css({
+                        "font-size": "0.18rem"
+                    })
+                }
             }
+            stop(); //直接默认不让滑动
+            window.addEventListener("orientationchange", function() {
+                // alert('刷新')
+                // location.reload();
+                setTimeout(() => {
+                    window.location.replace(window.location.href)
+                }, 100)
+            }, false)
         });
-        var mo = function(e) {
-            e.preventDefault();
-        };
-
-        function stop() {
-            document.body.style.overflow = 'hidden';
-            document.addEventListener("touchmove", mo, {
-                passive: false
-            }); //禁止页面滑动
-        }
-        //直接默认不让滑动
-        stop();
     </script>
     <style>
         #wrap {
             overflow: hidden;
         }
+        
+        body {
+            font-size: 0.14rem;
+        }
+        /* 设备竖屏时调用该段css代码 */
+        
+        @media all and (orientation: portrait) {
+            html {
+                font-size: 13.33vw;
+            }
+        }
+        /* 设备横屏时调用该段css代码 */
+        
+        @media all and (orientation: landscape) {
+            html {
+                font-size: 13.33vh;
+            }
+        }
     </style>
 </head>
-<!-- id="screen-change"  -->
 
-<body id="print" class="h">
+<body>
     <div id="main">
         <div id="error">羊老师，您使用的浏览器无法支持即将显示的内容，请换成谷歌(<a href="http://www.google.cn/chrome/intl/zh-CN/landing_chrome.html?hl=zh-CN&brand=CHMI">Chrome</a>)或者火狐(<a href="http://firefox.com.cn/download/">Firefox</a>)浏览器哟~</div>
         <div id="wrap">
@@ -110,20 +151,18 @@
                     <span class="say"><span class="space"></span> -- 缪崽.</span>
                 </div> -->
                 <div id="code">
-                    <span class="say">8月9日消息，近日，阿里女员工疑遭侵害一事引发舆</span><br>
-                    <span class="say">对此，人民日报评论称，越是扩张发展，企业文</span><br>
-                    <span class="say">近日，“某企业女员工被侵害”一事持续引发关注。</span><br>
-                    <span class="say">取证；根据相关企业公布的“阶段性调查和处理</span><br>
+                    <span class="say">8月9日消息，近日，阿里女员工疑遭侵</span><br>
+                    <span class="say">对此，人民日报评论称，越是扩张发展</span><br>
+                    <span class="say">近日，“某企业女员工被侵害”一事持续</span><br>
+                    <span class="say">取证；根据相关企业公布的“阶段性调查</span><br>
                     <span class="say">截至目前，事实暂未清晰，有待警</span><br>
-                    <span class="say">方权威调查后及时通报；如有人员违法犯罪，</span><br>
-                    <span class="say">受到法律制裁。</span><br>
+                    <span class="say">方权威调查后及时通报；如有人员违法</span><br>
                     <span class="say">我们相信，真相与正义不会缺席！</span><br>
                     <span class="say">舆情焦点往往是关切重点。</span><br>
                     <span class="say">此事在网络平台曝光后，引致人们</span><br>
                     <br>
                     <span class="say">权益，有的呼吁维权渠道，有</span><br>
                     <span class="say">的反思“酒桌文化”……这些探讨</span><br>
-                    <span class="say">始于但不限于这一件事，为人们</span><br>
                     <br>
                     <span class="say"><span class="space"></span> -- 人民日报</span>
                 </div>
@@ -135,9 +174,8 @@
             </div>
             <canvas id="canvas" width="1100" height="680"></canvas>
         </div>
-        <!-- <audio src="https://es-sycdn.kuwo.cn/91342da12cf03e742c47b894040177f0/61122679/resource/n3/76/40/2351151835.mp3" autoplay="autoplay"></audio> -->
+        <audio src="love.mp3" id="vd"></audio>
     </div>
-    <audio src="https://es-sycdn.kuwo.cn/91342da12cf03e742c47b894040177f0/61122679/resource/n3/76/40/2351151835.mp3" autoplay="autoplay"></audio>
 
 
     <script>
@@ -201,8 +239,12 @@
             var seed = tree.seed;
             var foot = tree.footer;
             var hold = 1;
-
+            /**
+             * 第一次点击
+             * 
+             */
             canvas.click(function(e) {
+                playMusic();
                 var offset = canvas.offset(),
                     x, y;
                 x = e.pageX - offset.left;
@@ -314,6 +356,7 @@
 
 
 </body>
-
+<script>
+</script>
 
 </html>
